@@ -30,7 +30,7 @@ To apply the plugin you have to add the plugin dependency in your project build 
 	    }
 	}
 
-
+apply plugin 'com.harshild.felix-run'
 
 ### Tasks ###
 

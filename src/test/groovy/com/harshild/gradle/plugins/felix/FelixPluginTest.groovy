@@ -11,7 +11,7 @@ class FelixPluginTest {
     @Test
     public void greeterPluginAddsGreetingTaskToProject() {
         Project project = ProjectBuilder.builder().build()
-        project.apply plugin: 'felix'
+        project.apply plugin: 'com.harshild.felix-run'
 
         assertTrue(project.extensions.felix instanceof FelixPluginExtension)
 
