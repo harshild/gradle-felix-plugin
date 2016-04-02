@@ -1,7 +1,7 @@
-package com.harshil.gradle.plugins.felix
+package com.harshild.gradle.plugins.felix
 
-import com.harshil.gradle.plugins.felix.tasks.BuildBundlesTask
-import com.harshil.gradle.plugins.felix.tasks.RunFelixTask
+import com.harshild.gradle.plugins.felix.tasks.BuildBundlesTask
+import com.harshild.gradle.plugins.felix.tasks.RunFelixTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPlugin

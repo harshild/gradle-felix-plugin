@@ -1,10 +1,10 @@
-package com.harshil.gradle.plugins.felix
+package com.harshild.gradle.plugins.felix
 
 import org.junit.Test
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
-import com.harshil.gradle.plugins.felix.tasks.BuildBundlesTask
-import com.harshil.gradle.plugins.felix.tasks.RunFelixTask
+import com.harshild.gradle.plugins.felix.tasks.BuildBundlesTask
+import com.harshild.gradle.plugins.felix.tasks.RunFelixTask
 import static org.testng.Assert.*
 
 class FelixPluginTest {

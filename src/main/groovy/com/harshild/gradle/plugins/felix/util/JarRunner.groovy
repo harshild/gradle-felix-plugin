@@ -1,4 +1,4 @@
-package com.harshil.gradle.plugins.felix.util
+package com.harshild.gradle.plugins.felix.util
 
 import java.util.concurrent.atomic.AtomicBoolean
 /**

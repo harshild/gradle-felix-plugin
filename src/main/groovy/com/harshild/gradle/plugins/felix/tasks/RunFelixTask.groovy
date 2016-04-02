@@ -1,6 +1,6 @@
-package com.harshil.gradle.plugins.felix.tasks
+package com.harshild.gradle.plugins.felix.tasks
 
-import com.harshil.gradle.plugins.felix.util.JarRunner
+import com.harshild.gradle.plugins.felix.util.JarRunner
 import org.gradle.api.tasks.TaskAction
 
 class RunFelixTask extends BaseTask {

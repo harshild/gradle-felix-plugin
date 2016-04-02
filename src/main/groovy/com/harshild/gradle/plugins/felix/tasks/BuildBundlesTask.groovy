@@ -1,4 +1,4 @@
-package com.harshil.gradle.plugins.felix.tasks
+package com.harshild.gradle.plugins.felix.tasks
 
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.artifacts.Dependency

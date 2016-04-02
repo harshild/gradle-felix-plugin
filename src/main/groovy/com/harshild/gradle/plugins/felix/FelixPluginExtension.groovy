@@ -1,4 +1,4 @@
-package com.harshil.gradle.plugins.felix
+package com.harshild.gradle.plugins.felix
 
 class FelixPluginExtension {
     int logLevel = 1
