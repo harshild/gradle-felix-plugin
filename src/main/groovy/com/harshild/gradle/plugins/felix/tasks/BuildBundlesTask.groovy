@@ -22,7 +22,7 @@ obr.repository.url=%s
     
     def copySubprojects(rootProject, target) {
         bundleProjects(rootProject).each { project ->
-            ant.copy(file: "${project.name}/build/libs/${project.name}-${project.version}.jar",
+            ant.copy(file: "${project.buildDir.absolutePath}/libs/${project.name}-${project.version}.jar",
                 todir: "$target")
         }
     }

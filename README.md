@@ -11,27 +11,22 @@ Features
 Features of the Felix Launcher Plugin:
 
 * Download of the required apache felix framework bundles
-
 * Configuration, assembly and execution of the felix framework
-
 * Compiling and including of custom bundles into the felix framework
 
 Usage
 -----
 ### Include in project ###
 
-You can download the plugin and install ist to your local maven repository:
 
-	$>gradle install
-
-To apply the plugin you have to add the plugindependenciy in your project buildfile:
+To apply the plugin you have to add the plugin dependency in your project build file:
 
 	buildscript {
 	    repositories {
-	        mavenLocal()
+	        url 'https://github.com/harshild/repo/raw/master/'
 	    }
 	    dependencies {
-	        classpath group: 'com.harshild.gradle', name: 'felix-plugin', version: '1.1.1'
+	        classpath group: 'com.harshild.gradle', name: 'felix-plugin', version: '1.2.0'
 	    }
 	}
 
@@ -64,5 +59,5 @@ scr and log as additional bundles:
 Credits
 -----
 
-Build using Felix Launcher plugin
+Build with reference Felix Launcher plugin
  https://github.com/thomasvolk/gradle-felix-launcher-plugin.git
