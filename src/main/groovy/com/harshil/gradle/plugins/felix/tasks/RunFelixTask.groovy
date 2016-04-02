@@ -1,11 +1,13 @@
 package com.harshil.gradle.plugins.felix.tasks
 
+import com.harshil.gradle.plugins.felix.util.JarRunner
 import org.gradle.api.tasks.TaskAction
 
 class RunFelixTask extends BaseTask {
 
     @TaskAction
     def run() {
-        ant.java(jar: felixMainJar, fork: true, dir: targetDir)
+        JarRunner jarRunner = new JarRunner();
+        jarRunner.run(project.buildDir.absolutePath+"\\felixMain")
     }
 }
