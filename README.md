@@ -18,6 +18,24 @@ Features of the Felix Launcher Plugin:
 
 Usage
 -----
+### Include in project ###
+
+You can download the plugin and install ist to your local maven repository:
+
+	$>gradle install
+
+To apply the plugin you have to add the plugindependenciy in your project buildfile:
+
+	buildscript {
+	    repositories {
+	        mavenLocal()
+	    }
+	    dependencies {
+	        classpath group: 'com.harshil.gradle', name: 'felix-plugin', version: '1.1.1'
+	    }
+	}
+
+
 
 ### Tasks ###
 
