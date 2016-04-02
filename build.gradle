@@ -3,7 +3,7 @@ apply plugin: 'maven'
 
 group = 'com.harshil.gradle'
 version = '1.1.0'
-archivesBaseName = 'felix'
+archivesBaseName = 'felix-plugin'
 
 repositories {
   mavenLocal()
