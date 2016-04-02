@@ -26,11 +26,11 @@ To apply the plugin you have to add the plugin dependency in your project build 
 	        url 'https://github.com/harshild/repo/raw/master/'
 	    }
 	    dependencies {
-	        classpath group: 'com.harshild.gradle', name: 'felix-plugin', version: '1.2.0'
+	        classpath group: 'com.harshild.gradle', name: 'felix-plugin', version: '1.3.0'
 	    }
 	}
 
-apply plugin 'com.harshild.felix-run'
+        apply plugin 'com.harshild.felix-run'
 
 ### Tasks ###
 
