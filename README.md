@@ -31,7 +31,7 @@ To apply the plugin you have to add the plugindependenciy in your project buildf
 	        mavenLocal()
 	    }
 	    dependencies {
-	        classpath group: 'com.harshil.gradle', name: 'felix-plugin', version: '1.1.1'
+	        classpath group: 'com.harshild.gradle', name: 'felix-plugin', version: '1.1.1'
 	    }
 	}
 
