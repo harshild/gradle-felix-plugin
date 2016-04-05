@@ -1,6 +1,8 @@
 Gradle Felix Plugin
 ============================
 
+[![Join the chat at https://gitter.im/harshild/gradle-felix-plugin](https://badges.gitter.im/harshild/gradle-felix-plugin.svg)](https://gitter.im/harshild/gradle-felix-plugin?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This is the Felix Plugin for the Gradle build system. This Plugin enables
 the creation of a apache felix framework installation to ready run a osgi bundle
 application.
