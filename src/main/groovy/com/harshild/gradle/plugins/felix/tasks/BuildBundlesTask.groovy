@@ -26,6 +26,15 @@ obr.repository.url=%s
                 todir: "$target")
         }
     }
+    
+    def copySubprojectsConfigResource(rootProject, target) {
+        bundleProjects(rootProject).each { project ->
+        if(new File("${project.buildDir.absolutePath}/../config/").exists())
+            ant.copy(todir: "$target/../config"){
+            	fileset(dir: "${project.buildDir.absolutePath}/../config/")
+            }
+        }
+    }
 
     @TaskAction
     def build() {
@@ -54,5 +63,6 @@ obr.repository.url=%s
           ))
         }
         copySubprojects(project, bundleDir)
+        copySubprojectsConfigResource(project, bundleDir)
     }
 }
