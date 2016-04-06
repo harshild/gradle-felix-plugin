@@ -40,6 +40,10 @@ To apply the plugin you have to add the plugin dependency in your project build 
 The felix framework will be created in the following directory:
 
 	build/felixMain
+	
+Configuration files in ./config in each subprojects will be copied to following directory:
+
+	build/felixMain/config
 
 ### Dependency configuration ###
 
