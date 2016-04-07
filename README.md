@@ -8,8 +8,7 @@ application.
 Features
 --------
 
-Features of the Felix Launcher Plugin:
-
+Features of the Felix Plugin:
 * Download of the required apache felix framework bundles
 * Configuration, assembly and execution of the felix framework
 * Compiling and including of custom bundles into the felix framework
@@ -63,5 +62,5 @@ scr and log as additional bundles:
 Credits
 -----
 
-Build with reference Felix Launcher plugin
+Build with reference to Felix Launcher plugin
  https://github.com/thomasvolk/gradle-felix-launcher-plugin.git
