@@ -22,10 +22,10 @@ To apply the plugin you have to add the plugin dependency in your project build 
 
 	buildscript {
 	    repositories {
-	        url 'https://github.com/harshild/repo/raw/master/'
+	       mavenCentral()
 	    }
 	    dependencies {
-	        classpath group: 'com.harshild.gradle', name: 'felix-plugin', version: '1.3.0'
+	        classpath group: 'com.harshil.gradle', name: 'felix-plugin', version: '1.3.1'
 	    }
 	}
 
