@@ -1,5 +1,6 @@
 apply plugin: 'groovy'
 apply plugin: 'maven'
+apply plugin: 'signing'
 
 group = 'com.harshild.gradle'
 version = '1.3.1'
@@ -15,10 +16,65 @@ dependencies {
     compile localGroovy()
 }
 
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
 uploadArchives {
     repositories {
         mavenDeployer {
-            repository(url: uri('build/repo'))
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'felix'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'A gradle plugin for Felix'
+                url 'https://github.com/harshild/gradle-felix-plugin'
+
+                scm {
+                    connection 'https://github.com/harshild/gradle-felix-plugin.git'
+                    developerConnection 'https://github.com/harshild/gradle-felix-plugin.git'
+                    url 'https://github.com/harshild/gradle-felix-plugin'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'harshild'
+                        name 'Harshil Dhariwal'
+                        email 'harshil.dhariwal@gmail.com'
+                    }
+                }
+            }
         }
     }
 }
