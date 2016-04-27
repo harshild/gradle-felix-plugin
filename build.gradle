@@ -14,6 +14,7 @@ repositories {
 dependencies {
     compile gradleApi()
     compile localGroovy()
+    compile group: 'biz.aQute.bnd', name: 'biz.aQute.bndlib', version: '3.1.0'
 }
 
 task javadocJar(type: Jar) {
@@ -34,7 +35,7 @@ signing {
     sign configurations.archives
 }
 
-uploadArchives {
+uploadArchives  {
     repositories {
         mavenDeployer {
             beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
@@ -71,7 +72,7 @@ uploadArchives {
                     developer {
                         id 'harshild'
                         name 'Harshil Dhariwal'
-                        email 'harshil.dhariwal@gmail.com'
+                        email 'dummy@gmail.com'
                     }
                 }
             }
