@@ -1,5 +1,7 @@
 package com.harshild.gradle.plugins.felix.tasks
 
+import com.harshild.gradle.plugins.felix.util.BndWrapper
+import com.harshild.gradle.plugins.felix.util.BundleUtils
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.artifacts.Dependency
 
@@ -41,6 +43,7 @@ obr.repository.url=%s
         def bundles = project.configurations.felix.dependencies.collect { jar(it) }
         def felixMain = project.configurations.felixMain.dependencies.collect { jar(it) }
         def bundleDir = "$targetDir/bundle"
+        def nonBundles = [ ] as Set
         project.configurations.felixMain.each {
             if(felixMain.contains(it.name)) {
                 ant.copy(file: it.path, tofile: felixMainJar)
@@ -48,9 +51,25 @@ obr.repository.url=%s
         }
         project.configurations.felix.each {
             if(bundles.contains(it.name)) {
-                ant.copy(file: it.path, todir: bundleDir)
+                def nonBundle = BundleUtils.notBundle( it )
+                if ( nonBundle ) nonBundles << it
+                else {
+                    ant.copy(file: it.path, todir: bundleDir)
+                }
             }
         }
+
+        nonBundles.each { File file ->
+            println(file.name)
+
+                try {
+                    BndWrapper.wrapNonBundle( file, bundleDir )
+                } catch ( e ) {
+                    println( "Unable to wrap ${file.name}" + e.message )
+                }
+
+        }
+
         def confDir = "$targetDir/conf"
         new File(confDir).mkdirs()
         new File("$confDir/config.properties").withWriter { w ->
