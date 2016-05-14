@@ -47,7 +47,7 @@ obr.repository.url=%s
             File baseProject = new File("${project.buildDir.absolutePath}/libs/${project.name}-${project.version}.jar")
             fileList.add(baseProject)
 
-            def bundle = new File( "$target/${project.name}-${project.version}-dep.jar" )
+            def bundle = new File( "$target/${project.name}-${project.version}.jar" )
 
             BundleUtils.fatJar( fileList, bundle ) {
                 ZipFile input, ZipOutputStream out, ZipEntry entry ->
