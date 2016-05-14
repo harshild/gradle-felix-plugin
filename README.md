@@ -9,9 +9,11 @@ Features
 --------
 
 Features of the Felix Plugin:
-* Download of the required apache felix framework bundles
-* Configuration, assembly and execution of the felix framework
+* Downloads all required apache felix framework bundles
+* Configure, assemble and execute/run felix framework with all bundles
 * Compiling and including of custom bundles into the felix framework
+* Auto creation of Bundles for all Sub Projects which includes all compile time dependencies
+* Auto Wrap default OSGi bundle configuration for non-bundles mentioned with felix configuration 
 
 Usage
 -----
