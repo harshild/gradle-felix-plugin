@@ -29,7 +29,7 @@ obr.repository.url=%s
         rootProject.subprojects.findAll { project -> project.name != name }
     }
 
-    def copySubprojects(rootProject, target) {
+    def copySubProjects(rootProject, target) {
         List<String> filterDep = new ArrayList<>()
         filterDep.add(OSGI_CORE)
         filterDep.add(COMMONS_LANG)
@@ -40,15 +40,14 @@ obr.repository.url=%s
         bundleProjects(rootProject).each { project ->
             List<File> fileList = new ArrayList<>();
             project.configurations.compile.each { z ->
-                if(!filterDep.contains(z.name)) {
+                if (!filterDep.contains(z.name)) {
                     fileList.add(new File(z.toString()))
                 }
             }
-
-            def bundle = new File( "$target/${project.name}-${project.version}-dep.jar" )
-
             File baseProject = new File("${project.buildDir.absolutePath}/libs/${project.name}-${project.version}.jar")
             fileList.add(baseProject)
+
+            def bundle = new File( "$target/${project.name}-${project.version}-dep.jar" )
 
             BundleUtils.fatJar( fileList, bundle ) {
                 ZipFile input, ZipOutputStream out, ZipEntry entry ->
@@ -66,8 +65,7 @@ obr.repository.url=%s
 
     }
 
-
-    def copySubprojectsConfigResource(rootProject, target) {
+    def copySubProjectsConfigResource(rootProject, target) {
         bundleProjects(rootProject).each { project ->
             if(new File("${project.buildDir.absolutePath}/../config/").exists())
                 ant.copy(todir: "$target/../config"){
@@ -117,7 +115,7 @@ obr.repository.url=%s
                     project.extensions.felix.propertiesString
             ))
         }
-        copySubprojects(project, bundleDir)
-        copySubprojectsConfigResource(project, bundleDir)
+        copySubProjects(project, bundleDir)
+        copySubProjectsConfigResource(project, bundleDir)
     }
 }
