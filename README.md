@@ -77,6 +77,14 @@ For any other configuration user can use
     properties.testProperty = '123'
 which will add testProperty in Felix configuration file
 
+#### Exclude Projects ####
+
+If your multi-project structure has some projects that are not supposed to be deployed as bundle but are actually consumed as dependency you may exclude them 
+
+    felix{
+        exclude 'project1', 'project2'
+    }
+
 Most Updated Version (usally BETA Release)
 ------------------------------------------
 
