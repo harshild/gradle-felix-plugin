@@ -1,17 +1,17 @@
 Gradle Felix Plugin
 ============================
 
-This is the Felix Plugin for the Gradle build system. This Plugin enables
-the creation of a apache felix framework installation to ready run a osgi bundle
-application.
+This is the Felix Plugin for the Gradle build system. This Plugin enables the creation of a apache felix framework installation to ready run a osgi bundle application.
 
 Features
 --------
 
 Features of the Felix Plugin:
+
 * Download of the required apache felix framework bundles
 * Configuration, assembly and execution of the felix framework
 * Compiling and including of custom bundles into the felix framework
+* Easy and Flexible development
 
 Usage
 -----
@@ -46,21 +46,39 @@ Configuration files in ./config in each subprojects will be copied to following 
 
 ### Dependency configuration ###
 
-This plugin defines a new dependency configuration named "felix".
-Artifacts defined with this dependency configuration will be downloaded and
-added to the felix bundle directory.
+This plugin defines a new dependency configuration "felix". Artifacts defined with this dependency configuration will be resolved and added as bundle to the felix bundle directory.
 
-This feature makes ist possible to configure the bundle composition of the
-felix framework. This configuration assembles a felix framework with
-scr and log as additional bundles:
-
+In addition to this, it also uses BndWrapper to automatically Wrap OSGI to make a non-bundle dependency mentioned in felix configuration OSGI deploy-able.
+ 
 	dependencies {
 	  felix 'org.apache.felix:org.apache.felix.scr:1.6.0'
 	  felix 'org.apache.felix:org.apache.felix.log:1.0.1'
 	}
 
+### Other configurations ###
+
+To specify felix framework configurations use felix extension
+
+    felix {
+    
+    }
+    
+#### Felix Configuration Properties####
+
+|  Property Alias |  Property |Default Value|
+|---|---|---|
+|log|felix.log.level|1|
+|httpPort|org.osgi.service.http.port|8080|
+|deployActions|felix.auto.deploy.action|install,start,update|
+|repositoryUrl|obr.repository.url|http://felix.apache.org/obr/releases.xml |
+
+For any other configuration user can use
+    
+    properties.testProperty = '123'
+which will add testProperty in Felix configuration file
+
 Most Updated Version (usally BETA Release)
----------
+------------------------------------------
 
 This version is available to all but is not stable. It usually contains newest features, which are tested working but may/may not give desired results always.
 
@@ -68,12 +86,16 @@ This version is available to all but is not stable. It usually contains newest f
 
 You may log issues found in BETA release.
 
-### HOW TO USE ###
+#### How to Use ####
 
 To use simply update your gradle build script with above mentioned version.
 
-Credits
------
+Contribution
+------------
 
-Build with reference to Felix Launcher plugin
- https://github.com/thomasvolk/gradle-felix-launcher-plugin.git
+* Log issues, new features and enhancements
+* For code changes, send a pull request
+
+## HELP NEEDED IN AREAS ##
+
+* Unit Tests
