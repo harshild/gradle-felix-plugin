@@ -32,6 +32,31 @@ class BundleUtils {
         }
     }
 
+    static void fatJar(List sources, File destination,
+                       Closure copyFunction,
+                       Closure afterFunction = { _ -> } ) {
+        def destinationStream = new ZipOutputStream( destination.newOutputStream() )
+        for(source in sources) {
+            def input = new ZipFile(source as String)
+            try {
+                for (entry in input.entries()) {
+                    copyFunction(input, destinationStream, entry)
+                }
+                afterFunction(destinationStream)
+            } finally {
+
+                try {
+                    input.close()
+                } catch (ignored) {
+                }
+            }
+        }
+        try {
+            destinationStream.close()
+        } catch (ignored) {
+        }
+    }
+
     static withManifestEntry( file, Closure consumeManifest, Callable manifestMissing = { -> } ) {
         withJarEntry( file, 'META-INF/MANIFEST.MF', consumeManifest, manifestMissing )
     }
