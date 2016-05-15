@@ -2,6 +2,7 @@ package com.harshild.gradle.plugins.felix.tasks
 
 import com.harshild.gradle.plugins.felix.util.BndWrapper
 import com.harshild.gradle.plugins.felix.util.BundleUtils
+import org.gradle.api.Project
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.artifacts.Dependency
 
@@ -26,7 +27,19 @@ obr.repository.url=%s
     }
 
     def bundleProjects(rootProject) {
-        rootProject.subprojects.findAll { project -> project.name != name }
+        List<String> excludeP = new ArrayList<>();
+        Set<Project> bundles = new ArrayList<>();
+        project.extensions.felix.excludedProjects.each{
+            excludeP.add(it);
+        }
+
+        rootProject.subprojects.each {project ->
+            excludeP.each { ex ->
+                if(project.name != ex && project.name != name)
+                    bundles.add(project)
+            }
+        }
+        bundles
     }
 
     def copySubProjects(rootProject, target) {
@@ -53,7 +66,9 @@ obr.repository.url=%s
                 ZipFile input, ZipOutputStream out, ZipEntry entry ->
                     String temp = project.name+"-"+project.version+".jar"
                     if ( (input.name.contains(temp) ||
-                            entry.name != 'META-INF/MANIFEST.MF') &&
+                            (entry.name != 'META-INF/MANIFEST.MF' &&
+                                    entry.name != 'OSGI-INF/serviceComponents.xml')
+                    ) &&
                             !entry.isDirectory()) {
                         out.putNextEntry(entry)
                         out.write(input.getInputStream(entry).bytes)
