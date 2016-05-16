@@ -100,6 +100,8 @@ You may log issues found in BETA release.
 
 To use simply update your gradle build script with above mentioned version.
 
+######WORKING EXAMPLE : https://github.com/harshild/gradle-felix-example######
+
 Contribution
 ------------
 
