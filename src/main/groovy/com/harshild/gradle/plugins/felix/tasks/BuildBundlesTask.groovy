@@ -60,7 +60,9 @@ obr.repository.url=%s
             File baseProject = new File("${project.buildDir.absolutePath}/libs/${project.name}-${project.version}.jar")
             fileList.add(baseProject)
 
-            def bundle = new File( "$target/${project.name}-${project.version}.jar" )
+            new File("$target/../tmp/felix").mkdirs()
+
+            def bundle = new File( "$target/../tmp/felix/${project.name}-${project.version}.jar" )
 
             BundleUtils.fatJar( fileList, bundle ) {
                 ZipFile input, ZipOutputStream out, ZipEntry entry ->
@@ -76,8 +78,11 @@ obr.repository.url=%s
 
             }
 
+            BndWrapper.wrapNonBundle(bundle,"$target")
         }
 
+       new File("$target/../tmp/felix").deleteDir()
+       new File("$target/../tmp/felix").delete()
     }
 
     def copySubProjectsConfigResource(rootProject, target) {
