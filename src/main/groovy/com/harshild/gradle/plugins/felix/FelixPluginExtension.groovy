@@ -14,7 +14,7 @@ class FelixPluginExtension {
         properties.collect { "$it.key=$it.value" }.join("\n")
     }
 
-    def exclude(String... args){
+    def excludeProjects(String... args){
         args.each {
             excludedProjects.add(it);
         }
