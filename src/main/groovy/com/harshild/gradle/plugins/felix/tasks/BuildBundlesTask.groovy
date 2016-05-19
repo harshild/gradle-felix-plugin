@@ -3,6 +3,7 @@ package com.harshild.gradle.plugins.felix.tasks
 import com.harshild.gradle.plugins.felix.util.BndWrapper
 import com.harshild.gradle.plugins.felix.util.BundleUtils
 import org.gradle.api.Project
+import org.gradle.api.internal.artifacts.dependencies.DefaultSelfResolvingDependency
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.artifacts.Dependency
 
@@ -96,7 +97,7 @@ obr.repository.url=%s
 
     @TaskAction
     def build() {
-        def bundles = project.configurations.felix.dependencies.collect { jar(it) }
+        def bundles = getFirstDependencies()
         def felixMain = project.configurations.felixMain.dependencies.collect { jar(it) }
         def bundleDir = "$targetDir/bundle"
         def nonBundles = [ ] as Set
@@ -137,5 +138,20 @@ obr.repository.url=%s
         }
         copySubProjects(project, bundleDir)
         copySubProjectsConfigResource(project, bundleDir)
+    }
+
+    private Set<String> getFirstDependencies() {
+        Set<String> depSet = new HashSet<>();
+        project.configurations.felix.dependencies.each {
+            if (it.class.name.contains("org.gradle.api.internal.artifacts.dependencies.DefaultSelfResolvingDependency")) {
+                DefaultSelfResolvingDependency a = it as DefaultSelfResolvingDependency
+                a.resolve().each {
+                    depSet.add(it.name)
+                }
+            } else {
+                depSet.add(jar(it))
+            }
+        }
+        return depSet
     }
 }
