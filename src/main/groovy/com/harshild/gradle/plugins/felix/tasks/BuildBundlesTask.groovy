@@ -34,10 +34,13 @@ obr.repository.url=%s
         }
 
         rootProject.subprojects.each {project ->
-            excludeP.each { ex ->
-                if(project.name != ex && project.name != name)
-                    bundles.add(project)
-            }
+            if(excludeP.size()>0)
+                excludeP.each { ex ->
+                    if(project.name != ex && project.name != name)
+                        bundles.add(project)
+                }
+            else
+                bundles.add(project)
         }
         bundles
     }
