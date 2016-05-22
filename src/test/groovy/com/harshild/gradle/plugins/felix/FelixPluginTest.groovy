@@ -9,12 +9,12 @@ import com.harshild.gradle.plugins.felix.tasks.RunFelixTask
 import static org.testng.Assert.*
 
 class FelixPluginTest {
-Project project ;
-@Before
-public void init(){
-project = ProjectBuilder.builder().build()
-    project.apply plugin: 'com.harshild.felix-run'
-}
+    Project project ;
+    @Before
+    public void init(){
+        project = ProjectBuilder.builder().build()
+        project.apply plugin: 'com.harshild.felix-run'
+    }
 
     @Test
     public void itShouldAssFelixExtension() {
