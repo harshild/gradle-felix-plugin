@@ -18,15 +18,11 @@ class FelixPluginTest {
 
     @Test
     public void itShouldAssFelixExtension() {
-
-
         assertTrue(project.extensions.felix instanceof FelixPluginExtension)
-
     }
 
     @Test
     public void itShouldActiveTasks() {
-
         assertTrue(project.tasks.buildBundles instanceof BuildBundlesTask)
         assertTrue(project.tasks.runFelix instanceof RunFelixTask)
     }
