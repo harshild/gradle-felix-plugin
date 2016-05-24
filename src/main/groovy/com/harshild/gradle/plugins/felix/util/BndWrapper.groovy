@@ -25,8 +25,10 @@ class BndWrapper {
         String implTitle = currentManifest.mainAttributes.getValue( 'Implementation-Title' ) ?:
                         titleFromFileName( jarFile.name )
 
-        String imports =  '*'
-        String exports =  '*'
+        String imports =  currentManifest.mainAttributes.getValue( 'Import-Package' ) ?:
+                '*'
+        String exports =  currentManifest.mainAttributes.getValue( 'Export-Package' ) ?:
+                '*'
 
         def analyzer = new Analyzer().with {
             jar = newJar
