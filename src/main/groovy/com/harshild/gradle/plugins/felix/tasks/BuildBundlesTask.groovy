@@ -8,6 +8,7 @@ import org.gradle.api.tasks.TaskAction
 import org.gradle.api.artifacts.Dependency
 
 import java.util.zip.ZipEntry
+import java.util.zip.ZipException
 import java.util.zip.ZipFile
 import java.util.zip.ZipOutputStream
 
@@ -76,8 +77,11 @@ obr.repository.url=%s
                                     entry.name != 'OSGI-INF/serviceComponents.xml')
                     ) &&
                             !entry.isDirectory()) {
-                        out.putNextEntry(entry)
-                        out.write(input.getInputStream(entry).bytes)
+                        try {
+                            out.putNextEntry(entry)
+                            out.write(input.getInputStream(entry).bytes)
+                        }
+                        catch (ZipException e){}
                     }
 
             }
