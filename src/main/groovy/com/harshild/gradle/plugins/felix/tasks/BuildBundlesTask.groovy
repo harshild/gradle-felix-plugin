@@ -51,27 +51,29 @@ obr.repository.url=%s
         List<String> filterDep = new ArrayList<>()
         filterDep.add(OSGI_CORE)
         filterDep.add(COMMONS_LANG)
-        bundleProjects(rootProject).forEach{project->
-            String temp = project.name+"-"+project.version+".jar"
+
+        def bundleProjectList = bundleProjects(rootProject)
+        bundleProjectList.forEach{ project->
+            String temp = project.archivesBaseName+"-"+project.version+".jar"
             filterDep.add(temp)
         }
-        bundleProjects(rootProject).each { project ->
+        bundleProjectList.each { project ->
             List<File> fileList = new ArrayList<>();
             project.configurations.compile.each { z ->
                 if (!filterDep.contains(z.name)) {
                     fileList.add(new File(z.toString()))
                 }
             }
-            File baseProject = new File("${project.buildDir.absolutePath}/libs/${project.name}-${project.version}.jar")
+            File baseProject = new File("${project.buildDir.absolutePath}/libs/${project.archivesBaseName}-${project.version}.jar")
             fileList.add(baseProject)
 
             new File("$target/../tmp/felix").mkdirs()
 
-            def bundle = new File( "$target/../tmp/felix/${project.name}-${project.version}.jar" )
+            def bundle = new File( "$target/../tmp/felix/${project.archivesBaseName}-${project.version}.jar" )
 
             BundleUtils.fatJar( fileList, bundle ) {
                 ZipFile input, ZipOutputStream out, ZipEntry entry ->
-                    String temp = project.name+"-"+project.version+".jar"
+                    String temp = project.archivesBaseName+"-"+project.version+".jar"
                     if ( (input.name.contains(temp) ||
                             (entry.name != 'META-INF/MANIFEST.MF' &&
                                     entry.name != 'OSGI-INF/serviceComponents.xml')
@@ -89,8 +91,8 @@ obr.repository.url=%s
             BndWrapper.wrapNonBundle(bundle,"$target")
         }
 
-       new File("$target/../tmp/felix").deleteDir()
-       new File("$target/../tmp/felix").delete()
+        new File("$target/../tmp/felix").deleteDir()
+        new File("$target/../tmp/felix").delete()
     }
 
     def copySubProjectsConfigResource(rootProject, target) {
