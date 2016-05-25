@@ -28,7 +28,7 @@ obr.repository.url=%s
         return "${dep.name}-${dep.version}.jar"
     }
 
-    def bundleProjects(rootProject) {
+    def getProjectsToBeBundles(rootProject) {
         List<String> excludeP = new ArrayList<>();
         Set<Project> bundles = new ArrayList<>();
         project.extensions.felix.excludedProjects.each{
@@ -48,55 +48,15 @@ obr.repository.url=%s
     }
 
     def copySubProjects(rootProject, target) {
-        List<String> filterDep = new ArrayList<>()
-        filterDep.add(OSGI_CORE)
-        filterDep.add(COMMONS_LANG)
-
-        def bundleProjectList = bundleProjects(rootProject)
-        bundleProjectList.forEach{ project->
-            String temp = project.archivesBaseName+"-"+project.version+".jar"
-            filterDep.add(temp)
-        }
+        def bundleProjectList = getProjectsToBeBundles(rootProject)
         bundleProjectList.each { project ->
-            List<File> fileList = new ArrayList<>();
-            project.configurations.compile.each { z ->
-                if (!filterDep.contains(z.name)) {
-                    fileList.add(new File(z.toString()))
-                }
-            }
-            File baseProject = new File("${project.buildDir.absolutePath}/libs/${project.archivesBaseName}-${project.version}.jar")
-            fileList.add(baseProject)
-
-            new File("$target/../tmp/felix").mkdirs()
-
-            def bundle = new File( "$target/../tmp/felix/${project.archivesBaseName}-${project.version}.jar" )
-
-            BundleUtils.fatJar( fileList, bundle ) {
-                ZipFile input, ZipOutputStream out, ZipEntry entry ->
-                    String temp = project.archivesBaseName+"-"+project.version+".jar"
-                    if ( (input.name.contains(temp) ||
-                            (entry.name != 'META-INF/MANIFEST.MF' &&
-                                    entry.name != 'OSGI-INF/serviceComponents.xml')
-                    ) &&
-                            !entry.isDirectory()) {
-                        try {
-                            out.putNextEntry(entry)
-                            out.write(input.getInputStream(entry).bytes)
-                        }
-                        catch (ZipException e){}
-                    }
-
-            }
-
+            def bundle = new File("${project.buildDir.absolutePath}/libs/${project.archivesBaseName}-${project.version}.jar")
             BndWrapper.wrapNonBundle(bundle,"$target")
         }
-
-        new File("$target/../tmp/felix").deleteDir()
-        new File("$target/../tmp/felix").delete()
     }
 
     def copySubProjectsConfigResource(rootProject, target) {
-        bundleProjects(rootProject).each { project ->
+        getProjectsToBeBundles(rootProject).each { project ->
             if(new File("${project.buildDir.absolutePath}/../config/").exists())
                 ant.copy(todir: "$target/../config"){
                     fileset(dir: "${project.buildDir.absolutePath}/../config/")
