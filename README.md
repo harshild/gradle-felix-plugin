@@ -19,6 +19,7 @@ Usage
 -----
 ### Include in project ###
 
+Just star the project and follow the procedure
 
 To apply the plugin you have to add the plugin dependency in your project build file:
 
@@ -81,16 +82,21 @@ which will add testProperty in Felix configuration file
 
 #### Exclude Projects ####
 
-If your multi-project structure has some projects that are not supposed to be deployed as bundle but are actually consumed as dependency you may exclude them 
+If your multi-project structure has some projects that are not supposed to be deployed as bundle you may exclude them 
 
     felix{
-        exclude 'project1', 'project2'
+        excludeProjects 'project1', 'project2'
     }
 
-Most Updated Version (usally BETA Release)
-------------------------------------------
+Most Updated Versions
+---------------------
 
-This version is available to all but is not stable. It usually contains newest features, which are tested working but may/may not give desired results always.
+## STABLE RELEASE ##
+
+    Latest Version -- 1.3.1
+
+## BETA RELEASE ##
+This version is available to all but is not stable. It usually contains **newest features**, which are tested working but may/may not give desired results always.
 
 	Latest Version -- 1.3.5-BETA
 
