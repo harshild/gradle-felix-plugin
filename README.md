@@ -11,7 +11,7 @@ Features of the Felix Plugin:
 * Downloads all required apache felix framework bundles
 * Configure, assemble and execute/run felix framework with all bundles
 * Compiling and including of custom bundles into the felix framework
-* Auto creation of Bundles for all Sub Projects which includes all compile time dependencies
+* Auto creation of Bundle for all Sub Projects which includes all compile time dependencies[**DISCONTINUED**]
 * Auto Wrap default OSGi bundle configuration for non-bundles mentioned with felix configuration 
 * Easy and Flexible development
 
@@ -92,7 +92,7 @@ Most Updated Version (usally BETA Release)
 
 This version is available to all but is not stable. It usually contains newest features, which are tested working but may/may not give desired results always.
 
-	Latest Version -- 1.3.3-BETA
+	Latest Version -- 1.3.5-BETA
 
 You may log issues found in BETA release.
 
