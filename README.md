@@ -1,5 +1,6 @@
 Gradle Felix Plugin
 ============================
+[![Build Status](https://travis-ci.org/harshild/gradle-felix-plugin.svg?branch=master)](https://travis-ci.org/harshild/gradle-felix-plugin)
 
 This is the Felix Plugin for the Gradle build system. This Plugin enables the creation of a apache felix framework installation to ready run a osgi bundle application.
 
