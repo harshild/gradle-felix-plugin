@@ -113,7 +113,7 @@ Contribution
 ------------
 
 * Log issues, new features and enhancements
-* For code changes, send a pull request
+* For code changes, send a pull request to development branch
 
 ## HELP NEEDED IN AREAS ##
 
