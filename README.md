@@ -12,9 +12,9 @@ Features of the Felix Plugin:
 * Downloads all required apache felix framework bundles
 * Configure, assemble and execute/run felix framework with all bundles
 * Compiling and including of custom bundles into the felix framework
-* Auto creation of Bundle for all Sub Projects which includes all compile time dependencies[**DISCONTINUED**]
 * Auto Wrap default OSGi bundle configuration for non-bundles mentioned with felix configuration 
 * Easy and Flexible development
+* Auto creation of Bundle for all Sub Projects which includes all compile time dependencies[**DISCONTINUED**]
 
 Usage
 -----
@@ -50,7 +50,7 @@ Configuration files in ./config in each subprojects will be copied to following 
 
 ### Dependency configuration ###
 
-This plugin defines a new dependency configuration "felix". Artifacts defined with this dependency configuration will be resolved and added as bundle to the felix bundle directory.
+This plugin defines a new dependency configuration "felix". Artifacts defined with this dependency configuration will be resolved and added with all transitive dependencies as bundle to the felix bundle directory.
 
 In addition to this, it also uses BndWrapper to automatically Wrap OSGI to make a non-bundle dependency mentioned in felix configuration OSGI deploy-able.
  
@@ -113,7 +113,7 @@ Contribution
 ------------
 
 * Log issues, new features and enhancements
-* For code changes, send a pull request
+* For code changes, send a pull request to development branch
 
 ## HELP NEEDED IN AREAS ##
 
