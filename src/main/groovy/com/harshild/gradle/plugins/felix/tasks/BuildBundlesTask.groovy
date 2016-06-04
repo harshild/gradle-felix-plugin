@@ -59,7 +59,7 @@ obr.repository.url=%s
 
     @TaskAction
     def build() {
-        def bundles = getFelixRuntimeDependencies()
+        def bundles = getRuntimeDependencies()
         def felixMain = project.configurations.felixMain.dependencies.collect { jar(it) }
         def bundleDir = "$targetDir/bundle"
         def nonBundles = [ ] as Set
@@ -98,6 +98,21 @@ obr.repository.url=%s
         }
         copySubProjects(project, bundleDir)
         copySubProjectsConfigResource(project, bundleDir)
+    }
+
+    private Set<File> getRuntimeDependencies() {
+        def runtimeDependencies = [ ] as Set
+        runtimeDependencies.addAll(getFelixRuntimeDependencies())
+        runtimeDependencies.addAll(getSubProjectCompileDependencies())
+        runtimeDependencies
+    }
+
+    private Set<File> getSubProjectCompileDependencies() {
+        def runtimeDependencies = [ ] as Set
+        project.subprojects.each { sub ->
+            runtimeDependencies.addAll(sub.configurations.compile.resolve())
+        }
+        runtimeDependencies
     }
 
     private Set<File> getFelixRuntimeDependencies() {
