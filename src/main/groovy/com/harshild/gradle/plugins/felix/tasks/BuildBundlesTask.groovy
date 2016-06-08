@@ -3,15 +3,8 @@ package com.harshild.gradle.plugins.felix.tasks
 import com.harshild.gradle.plugins.felix.util.BndWrapper
 import com.harshild.gradle.plugins.felix.util.BundleUtils
 import org.gradle.api.Project
-import org.gradle.api.internal.artifacts.dependencies.DefaultSelfResolvingDependency
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.artifacts.Dependency
-
-import java.util.zip.ZipEntry
-import java.util.zip.ZipException
-import java.util.zip.ZipFile
-import java.util.zip.ZipOutputStream
-
 
 class BuildBundlesTask extends BaseTask {
 
@@ -31,11 +24,11 @@ obr.repository.url=%s
     def getProjectsToBeBundles(rootProject) {
         List<String> excludeP = new ArrayList<>();
         Set<Project> bundles = new ArrayList<>();
-        project.extensions.felix.excludedProjects.each{
-            excludeP.add(it);
+        project.extensions.felix.excludedProjects.each{ String a->
+            excludeP.add(a);
         }
 
-        rootProject.subprojects.each {project ->
+        rootProject.subprojects.each {Project project ->
             if(excludeP.size()>0)
                 excludeP.each { ex ->
                     if(project.name != ex && project.name != name)
@@ -66,7 +59,7 @@ obr.repository.url=%s
 
     @TaskAction
     def build() {
-        def bundles = getFirstDependencies()
+        def bundles = getRuntimeDependencies()
         def felixMain = project.configurations.felixMain.dependencies.collect { jar(it) }
         def bundleDir = "$targetDir/bundle"
         def nonBundles = [ ] as Set
@@ -75,14 +68,12 @@ obr.repository.url=%s
                 ant.copy(file: it.path, tofile: felixMainJar)
             }
         }
-        project.configurations.felix.each {
-            if(bundles.contains(it.name)) {
+        bundles.each {
                 def nonBundle = BundleUtils.notBundle( it )
                 if ( nonBundle ) nonBundles << it
                 else {
                     ant.copy(file: it.path, todir: bundleDir)
                 }
-            }
         }
 
         nonBundles.each { File file ->
@@ -109,18 +100,22 @@ obr.repository.url=%s
         copySubProjectsConfigResource(project, bundleDir)
     }
 
-    private Set<String> getFirstDependencies() {
-        Set<String> depSet = new HashSet<>();
-        project.configurations.felix.dependencies.each {
-            if (it.class.name.contains("org.gradle.api.internal.artifacts.dependencies.DefaultSelfResolvingDependency")) {
-                DefaultSelfResolvingDependency a = it as DefaultSelfResolvingDependency
-                a.resolve().each {
-                    depSet.add(it.name)
-                }
-            } else {
-                depSet.add(jar(it))
-            }
+    private Set<File> getRuntimeDependencies() {
+        def runtimeDependencies = [ ] as Set
+        runtimeDependencies.addAll(getFelixRuntimeDependencies())
+        runtimeDependencies.addAll(getSubProjectCompileDependencies())
+        runtimeDependencies
+    }
+
+    private Set<File> getSubProjectCompileDependencies() {
+        def runtimeDependencies = [ ] as Set
+        project.subprojects.each { sub ->
+            runtimeDependencies.addAll(sub.configurations.compile.resolve())
         }
-        return depSet
+        runtimeDependencies
+    }
+
+    private Set<File> getFelixRuntimeDependencies() {
+        project.configurations.felix.resolve()
     }
 }
