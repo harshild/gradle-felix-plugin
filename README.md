@@ -60,9 +60,8 @@ In addition to this, it also uses BndWrapper to automatically Wrap OSGI to make 
 	}
 
 
-| **Note** :  Compile dependencies on sub-projects need not to be explicitly added as felix dependency, as they will be automatically resolved and added to runtime  |
-|-|
-
+|  NOTE |  Compile dependencies will be automatically resolved and added to runtime as felix dependency|
+|---|---|
 
 ### Other configurations ###
 
