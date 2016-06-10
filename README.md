@@ -109,7 +109,7 @@ Most Updated Versions
 ## BETA RELEASE ##
 This version is available to all but is not stable. It usually contains **newest features**, which are tested working but may/may not give desired results always.
 
-	Latest Version -- 1.3.5-BETA
+	Latest Version -- 1.3.6-BETA
 
 You may log issues found in BETA release.
 
