@@ -71,6 +71,12 @@ To specify felix framework configurations use felix extension
     
     }
     
+#### Properties####
+
+| Property  |  DefaultValue |
+|---|---|
+|  resolveVersion | true |
+    
 #### Felix Configuration Properties####
 
 |  Property Alias |  Property |Default Value|
