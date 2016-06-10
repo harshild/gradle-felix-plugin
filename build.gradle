@@ -4,7 +4,7 @@ apply plugin: 'maven-publish'
 //apply plugin: 'signing'
 
 group = 'com.harshil.gradle'
-version = '1.3.5-BETA'
+version = '1.3.6-BETA'
 archivesBaseName = 'felix-plugin'
 
 repositories {

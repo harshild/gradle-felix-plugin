@@ -14,7 +14,7 @@ Features of the Felix Plugin:
 * Compiling and including of custom bundles into the felix framework
 * Auto Wrap default OSGi bundle configuration for non-bundles mentioned with felix configuration 
 * Easy and Flexible development
-* Auto creation of Bundle for all Sub Projects which includes all compile time dependencies[**DISCONTINUED**]
+* ~~Auto creation of Bundle for all Sub Projects which includes all compile time dependencies~~[**DISCONTINUED**]
 
 Usage
 -----
@@ -59,6 +59,10 @@ In addition to this, it also uses BndWrapper to automatically Wrap OSGI to make 
 	  felix 'org.apache.felix:org.apache.felix.log:1.0.1'
 	}
 
+
+|  NOTE |  Compile dependencies will be automatically resolved and added to runtime as felix dependency|
+|---|---|
+
 ### Other configurations ###
 
 To specify felix framework configurations use felix extension
@@ -66,6 +70,12 @@ To specify felix framework configurations use felix extension
     felix {
     
     }
+    
+#### Properties####
+
+| Property  |  DefaultValue |
+|---|---|
+|  resolveVersion | true |
     
 #### Felix Configuration Properties####
 
@@ -99,7 +109,7 @@ Most Updated Versions
 ## BETA RELEASE ##
 This version is available to all but is not stable. It usually contains **newest features**, which are tested working but may/may not give desired results always.
 
-	Latest Version -- 1.3.5-BETA
+	Latest Version -- 1.3.6-BETA
 
 You may log issues found in BETA release.
 
