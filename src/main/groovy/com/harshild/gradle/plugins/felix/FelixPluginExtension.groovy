@@ -6,6 +6,7 @@ class FelixPluginExtension {
     int httpPort = 8080
     String repositoryUrl = 'http://felix.apache.org/obr/releases.xml'
     String mainArtifact = 'org.apache.felix:org.apache.felix.main:5.4.0'
+    boolean resolveVersion = true
     List<String> excludedProjects = new ArrayList<>();
 
     Map properties = [:]

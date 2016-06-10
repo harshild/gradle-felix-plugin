@@ -63,6 +63,9 @@ obr.repository.url=%s
         def felixMain = project.configurations.felixMain.dependencies.collect { jar(it) }
         def bundleDir = "$targetDir/bundle"
         def nonBundles = [ ] as Set
+
+        BndWrapper.resolveVersion = project.extensions.felix.resolveVersion
+
         project.configurations.felixMain.each {
             if(felixMain.contains(it.name)) {
                 ant.copy(file: it.path, tofile: felixMainJar)
