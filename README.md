@@ -4,6 +4,11 @@ Gradle Felix Plugin
 
 This is the Felix Plugin for the Gradle build system. This Plugin enables the creation of a apache felix framework installation to ready run a osgi bundle application.
 
+LICENSE
+--------
+
+Release after v1.3.6-BETA have GPL 3 license.
+
 Features
 --------
 
@@ -118,6 +123,11 @@ You may log issues found in BETA release.
 To use simply update your gradle build script with above mentioned version.
 
 ######WORKING EXAMPLE : https://github.com/harshild/gradle-felix-example######
+
+Credits
+------------
+
+The basic idea https://github.com/thomasvolk/gradle-felix-launcher-plugin
 
 Contribution
 ------------
