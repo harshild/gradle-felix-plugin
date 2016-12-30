@@ -7,7 +7,8 @@ This is the Felix Plugin for the Gradle build system. This Plugin enables the cr
 LICENSE
 --------
 
-Release after v1.3.6-BETA have GPL 3 license.
+Releases after v1.3.6-BETA, distributed under the GNU General Public License v3.0 (GPLv3). <br>
+Releases before v1.3.6-BETA, distributed UN-LICENSED.
 
 Features
 --------
